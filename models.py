@@ -9,10 +9,11 @@ class Game(Base):
     __tablename__ = 'game'
     id  = Column(Integer, primary_key=True, index=True)
     competition = Column(String)
-    date = Column(DateTime(timezone=True))
+    gameDate = Column(String)
     home_team_id = Column(Integer, ForeignKey('team.id'))
     away_team_id = Column(Integer, ForeignKey('team.id'))
-    winner_team_id = Column(Integer, ForeignKey('team.id'))
+    winner_team_id = Column(Integer, ForeignKey('team.id'), nullable=True)
+    addres = Column(String)
     time_created = Column(DateTime(timezone=True), server_default=func.now())
     time_updated = Column(DateTime(timezone=True), onupdate=func.now())
 

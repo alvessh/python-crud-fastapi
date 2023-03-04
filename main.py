@@ -28,7 +28,7 @@ async def root():
 
 @app.post('/game/', response_model=SchemaGame)
 async def game(game: SchemaGame):
-    db_game = ModelGame(competition=game.competition, date=game.date, home_team_id=game.home_team_id, away_team_id=game.away_team_id, winner_team_id=game.winner_team_id)
+    db_game = ModelGame(competition=game.competition, gameDate=game.gameDate, home_team_id=game.home_team_id, away_team_id=game.away_team_id, winner_team_id=game.winner_team_id, addres=game.addres)
     db.session.add(db_game)
     db.session.commit()
     return db_game
