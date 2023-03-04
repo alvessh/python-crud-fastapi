@@ -38,6 +38,11 @@ async def game():
     db_game = db.session.query(ModelGame).all()
     return db_game
 
+@app.get('/game/{id}')
+async def game(id: int):
+    db_game = db.session.query(ModelGame).filter_by(id=id).all()
+    return db_game
+
 @app.post('/team/', response_model=SchemaTeam)
 async def team(team:SchemaTeam):
     db_team = ModelTeam(description=team.description, level=team.level, sport=team.sport, country=team.country)
@@ -48,6 +53,11 @@ async def team(team:SchemaTeam):
 @app.get('/team/')
 async def team():
     db_team = db.session.query(ModelTeam).all()
+    return db_team
+
+@app.get('/team/{id}')
+async def team(id: int):
+    db_team = db.session.query(ModelTeam).filter_by(id=id).all()
     return db_team
 
 
