@@ -37,6 +37,9 @@ async def game(game: SchemaGame):
 async def game(id: int, game: SchemaGame):
     db_game = db.session.query(ModelGame).filter_by(id=id).first()
 
+    if db_game is None:
+        raise HTTPException(status_code=404, detail="Game not found")
+
     db_game.competition = game.competition
     db_game.gameDate = game.gameDate
     db_game.home_team_id = game.home_team_id
@@ -62,6 +65,10 @@ async def game(id: int):
 @app.delete('/game/{id}')
 async def game(id: int):
     db_game = db.session.query(ModelGame).filter_by(id=id).first()
+
+    if db_game is None:
+        raise HTTPException(status_code=404, detail="Game not found")
+
     db.session.delete(db_game)
     db.session.commit()
 
@@ -80,6 +87,9 @@ async def team(team:SchemaTeam):
 @app.put('/team/{id}', response_model=SchemaTeam)
 async def team(id: int, team:SchemaTeam):
     db_team = db.session.query(ModelTeam).filter_by(id=id).first()
+
+    if db_team is None:
+        raise HTTPException(status_code=404, detail="Team not found")
 
     db_team.description = team.description
     db_team.level = team.level
@@ -104,6 +114,10 @@ async def team(id: int):
 @app.delete('/team/{id}')
 async def team(id: int):
     db_team = db.session.query(ModelTeam).filter_by(id=id).first()
+
+    if db_team is None:
+        raise HTTPException(status_code=404, detail="Team not found")
+
     db.session.delete(db_team)
     db.session.commit()
 
