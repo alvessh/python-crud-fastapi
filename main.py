@@ -5,8 +5,7 @@ from fastapi_sqlalchemy import DBSessionMiddleware, db
 from schema import Game as SchemaGame
 from schema import Team as SchemaTeam
 
-from schema import Game
-from schema import Team
+from sqlalchemy.exc import IntegrityError
 
 from models import Game as ModelGame
 from models import Team as ModelTeam
@@ -118,10 +117,15 @@ async def team(id: int):
     if db_team is None:
         raise HTTPException(status_code=404, detail="Team not found")
 
-    db.session.delete(db_team)
-    db.session.commit()
+    try:
+        db.session.delete(db_team)
+        db.session.commit()
 
-    return {"message": "Game canceled successfully."}
+        return {"message": "Team deleted of successfull!"}
+    except IntegrityError as e:
+        db.session.rollback()
+        return {"error": "Cannot delete team due to foreign key constraint"}
+
 
 # END DOS ENDPOINT PARA TRABALHAR COM O TEAM
 
