@@ -1,26 +1,26 @@
 # API CRUD utilizando FastAPI
 
 O projeto aprensenta as seguintes rotas:
-# RAIZ
+### RAIZ
 - [GET] /
 
-# TIMES
+### TIMES
 - [GET] /game/
 - [POST] /game/ 
 - [PUT] /game/{id}
 - [DELETE] /game/{id}
 
-# GAMES
+### GAMES
 - [GET] /
 - [GET] /team/
 - [POST] /team/ 
 - [PUT] /team/{id}
 - [DELETE] /team/{id}
 
-# PARA ACESSAR A DOCUMENTAÇÃO
+### PARA ACESSAR A DOCUMENTAÇÃO
 - [GET] /docs
 
-# PARA EXECUÇÃO DO PROJETO
+### PARA EXECUÇÃO DO PROJETO
 ```
 $ pipenv.exe shell
     Successfully created virtual environment!
